@@ -15,7 +15,7 @@ urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 # Настройка основного логирования
 logging.basicConfig(
     level=logging.INFO,
-    filename='bot.log',
+    filename='logs/bot.log',
     format='%(asctime)s - %(levelname)s - %(message)s'
 )
 

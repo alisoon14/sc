@@ -11,6 +11,8 @@ from telegram import Bot
 
 async def reminder_checker():
     """Периодическая проверка и отправка напоминаний"""
+    bot = Bot(token=TELEGRAM_BOT_TOKEN)
+
     while True:
         try:
             reminders = get_pending_reminders()
@@ -29,11 +31,10 @@ async def reminder_checker():
                 if user_id:
                     try:
                         # Отправляем напоминание в личку пользователю
-                        bot = Bot(token=TELEGRAM_BOT_TOKEN)
                         await bot.send_message(
                             chat_id=user_id,
                             text=message,
-                            parse_mode='Markdown'
+                            parse_mode='HTML'
                         )
                         
                         # Помечаем как отправленное

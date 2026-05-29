@@ -133,7 +133,7 @@ async def handle_remote_request_conversation(update: Update, context: ContextTyp
                 f"📅 Дата: {shift_date.strftime('%d.%m.%Y')}\n\n"
                 f"⚠️ У вас нет назначенной смены на эту дату.\n"
                 f"Проверьте правильность даты или ваш график работы.\n\n"
-                f"🌐 Календарь смен: https://smena.center2m.com/calendar",
+                f"🌐 Календарь смен: а я вам не скажу :)",
                 reply_markup=get_main_menu_keyboard(),
                 parse_mode='markdown'
             )

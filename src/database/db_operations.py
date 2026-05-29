@@ -10,6 +10,12 @@ from src.config import DB_HOST, DB_USER, DB_PASS, DB_NAME, DB_HOST_2, DB_USER_2,
 
 def get_db_connection():
     """Создает подключение к основной базе данных"""
+    if not DB_HOST or not DB_USER or not DB_NAME:
+        raise ValueError(
+            "DB_HOST, DB_USER и DB_NAME должны быть заданы. "
+            "Проверьте файл .env или переменные окружения."
+        )
+
     return pymysql.connect(
         host=DB_HOST,
         user=DB_USER,

@@ -13,7 +13,7 @@ def setup_shift_exchange_logger():
     logger.setLevel(logging.INFO)
     
     # Создаем файл лога с текущей датой
-    log_filename = f"shift_exchange_{datetime.now().strftime('%Y%m%d')}.log"
+    log_filename = f"logs/shift_exchange_{datetime.now().strftime('%Y%m%d')}.log"
     
     # Создаем форматтер для логов
     formatter = logging.Formatter(

@@ -6,8 +6,14 @@
 import os
 from dotenv import load_dotenv
 
-# Загрузка переменных окружения
-load_dotenv()
+# Загрузка переменных окружения из файла .env рядом с корнем проекта
+project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
+dotenv_path = os.path.join(project_root, '.env')
+
+if os.path.exists(dotenv_path):
+    load_dotenv(dotenv_path)
+else:
+    load_dotenv()
 
 # Telegram Bot настройки
 TELEGRAM_BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN")
@@ -26,7 +32,7 @@ DB_USER = os.getenv("DB_USER")
 DB_PASS = os.getenv("DB_PASS")
 DB_NAME = os.getenv("DB_NAME")
 
-# Настройки второй базы данных
+# Настройки второй базы данных (ServiceDesk)
 DB_HOST_2 = os.getenv("DB_HOST_2")
 DB_USER_2 = os.getenv("DB_USER_2")
 DB_PASS_2 = os.getenv("DB_PASS_2")
@@ -43,41 +49,59 @@ SD_TASKS_URL = f"{SD_API_V3_URL}/tasks"
 SD_CHANGES_URL = f"{SD_API_V3_URL}/changes"
 
 # Telegram API URL
-TELEGRAM_API_BASE = f"https://api.telegram.org/bot{TELEGRAM_BOT_TOKEN}"
+TELEGRAM_API_BASE = f"https://api.telegram.org/bot8179803541:AAHNdnhIQtedIzqEwdRTxgsR-WvxX0MHLXo"
+
+# Required environment variables for startup validation
+REQUIRED_ENV_VARS = [
+    'TELEGRAM_BOT_TOKEN',
+    'TELEGRAM_CHAT_ID',
+    'DB_HOST',
+    'DB_USER',
+    'DB_NAME'
+]
+
+
+def get_missing_env_vars():
+    return [name for name in REQUIRED_ENV_VARS if not globals().get(name)]
+
+
+def validate_config():
+    missing = get_missing_env_vars()
+    if missing:
+        raise EnvironmentError(
+            f"Missing required environment variables: {', '.join(missing)}. "
+            "Проверьте .env файл или переменные окружения."
+        )
+
 
 # Списки разрешенных пользователей для различных операций
 ALLOWED_WORKLOG_OWNERS = {
-    "Федорова Арина Александровна",
-    "Бузанов Даниил Сергеевич", 
-    "Нехорошков Кирилл Александрович",
-    "Петрянкин Артем Евгеньевич",
-    "Кривохин Андрей Михайлович",
-    "Лещенко Федор"
+    "testusr1",
 }
 
 # Роли для согласования обменов смен
 SHIFT_EXCHANGE_ROLES = {
-    "lead_engineer": "wezersovvv",
-    "manager": "Electrowind"
+    "lead_engineer": "adminrole1",
+    "manager": "adminrole2"
 }
 
 # Роли для согласования удаленки
 REMOTE_REQUEST_ROLES = {
-    "lead_engineer": "wezersovvv",
-    "manager": "Electrowind"
+    "lead_engineer": "adminrole1",
+    "manager": "adminrole2"
 }
 
 # Администраторы (могут управлять сменами других пользователей)
 ADMIN_ROLES = {
-    "lead_engineer": "wezersovvv",
-    "manager": "Electrowind"
+    "lead_engineer": "adminrole1",
+    "manager": "adminrole2"
 }
 
 # Пользователи, которым не нужно подтверждение для удаленки
 REMOTE_NO_APPROVAL_USERS = [
-    "Electrowind",
-    "wezersovvv",
-    "arnfed"
+    "adminrole1",
+    "adminrole2",
+    "testusr1"
 ]
 
 # Лимиты для удаленки в зависимости от грейда

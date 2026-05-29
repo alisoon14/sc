@@ -15,7 +15,7 @@ sys.path.insert(0, project_root)
 from telegram.ext import ApplicationBuilder, CommandHandler, MessageHandler, CallbackQueryHandler, filters
 
 # Импорты из модульной структуры
-from src.config import TELEGRAM_BOT_TOKEN
+from src.config import TELEGRAM_BOT_TOKEN, validate_config
 from src.utils.auth_decorators import with_auth, group_ignore
 from src.handlers.command_handlers import (
     start_command as start,
@@ -36,7 +36,13 @@ from src.services.reminder_service import reminder_checker
 
 def main():
     """Основная функция запуска бота"""
-    
+
+    try:
+        validate_config()
+    except EnvironmentError as error:
+        print(f"[ERROR] Configuration invalid: {error}")
+        sys.exit(1)
+
     print("[INFO] Starting SmenaControl Bot (Refactored Version)")
     
     # Создание приложения бота
