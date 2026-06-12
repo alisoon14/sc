@@ -49,7 +49,7 @@ SD_TASKS_URL = f"{SD_API_V3_URL}/tasks"
 SD_CHANGES_URL = f"{SD_API_V3_URL}/changes"
 
 # Telegram API URL
-TELEGRAM_API_BASE = f"https://api.telegram.org/bot8179803541:AAHNdnhIQtedIzqEwdRTxgsR-WvxX0MHLXo"
+TELEGRAM_API_BASE =
 
 # Required environment variables for startup validation
 REQUIRED_ENV_VARS = [
